@@ -1,5 +1,5 @@
 <template>
-  <li @click="displayInfo">
+  <li @click="shortenDescription(film); displayInfo()">
     <p>{{film.title}}</p>
   </li>
 </template>
@@ -9,15 +9,27 @@ import {eventBus} from '../main.js'
 
 export default {
 name:'film-item',
+data() {
+    return {
+        shortDescription: ''
+    }
+},
 props: [
   'film'
 ],
 methods: {
 
-displayInfo: function() {
-  console.log(this.film);
-  eventBus.$emit("selected-film", this.film);
-}
+    displayInfo: function() {
+      console.log(this.film);
+      eventBus.$emit("selected-film", this.film, this.shortDescription);
+    },
+    shortenDescription: function (film) {
+        if (film.description.length > 350) {
+            this.shortDescription = `${film.description.slice(0, 350)}...`
+        } else {
+            this.shortDescription = film.description
+        }
+    }
 }
 }
 </script>

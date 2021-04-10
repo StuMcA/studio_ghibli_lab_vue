@@ -5,7 +5,7 @@
     </header>
     <main>
       <film-list :films="films"/>
-      <film-details v-if="selectedFilm" :film="selectedFilm" />
+      <film-details v-if="selectedFilm" :film="selectedFilm" :description="shortDescription"/>
     </main>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
   data() {
     return {
       films: [],
-      selectedFilm: null
+      selectedFilm: null,
+      shortDescription: ""
     }
   },
   components: {
@@ -37,7 +38,10 @@ export default {
   mounted() {
     this.getFilms();
 
-    eventBus.$on("selected-film", (film) => this.selectedFilm = film);
+    eventBus.$on("selected-film", (film, description) => {
+        this.selectedFilm = film
+        this.shortDescription = description
+      });
   }
 }
 </script>
