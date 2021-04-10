@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header>
+      <img src="./assets/studio-ghibli-logo.svg" alt="" id="logo">
+    </header>
+    <main>
+      <film-list />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FilmList from './components/FilmList.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    "film-list": FilmList
+  },
+  methods: {
+
+  },
+  mounted() {
+
   }
 }
 </script>
@@ -24,5 +34,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  
+}
+
+#logo {
+  width: 300px;
+}
+body {
+  background-color: rgb(193, 248, 248);
 }
 </style>
