@@ -1,5 +1,7 @@
 <template>
-  <p>{{film.name}}</p>
+  <li>
+    <p>{{film.title}}</p>
+  </li>
 </template>
 
 <script>
@@ -11,6 +13,11 @@ props: [
 }
 </script>
 
-<style>
+<style scoped>
+
+li {
+  list-style: none;
+}
+</style>>
 
 </style>

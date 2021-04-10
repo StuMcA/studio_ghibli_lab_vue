@@ -4,7 +4,7 @@
       <img src="./assets/studio-ghibli-logo.svg" alt="" id="logo">
     </header>
     <main>
-      <film-list />
+      <film-list :films="films"/>
     </main>
   </div>
 </template>
