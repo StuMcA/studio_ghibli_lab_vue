@@ -22,6 +22,7 @@
 
 <script>
 import {eventBus} from '../main.js'
+import CharacterList from './CharacterList.vue'
 
 export default {
 name: "film-full-details",
@@ -33,6 +34,9 @@ methods: {
         this.showFilmFull = false;
         eventBus.$emit("change-show-full-details", this.showFilmFull)
     }
+},
+components: {
+    "character-list": CharacterList
 }
 }
 </script>

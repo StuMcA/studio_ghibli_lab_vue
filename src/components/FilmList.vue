@@ -1,9 +1,7 @@
 <template>
-  <section>
       <ul>
           <film-item v-for="(film) in films" :key="film.id" :film="film" />
       </ul>
-  </section>
 </template>
 
 <script>
