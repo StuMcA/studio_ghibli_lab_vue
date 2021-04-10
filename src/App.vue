@@ -37,7 +37,7 @@ export default {
   mounted() {
     this.getFilms();
 
-    eventBus.$on('selected-film', film => this.selectedFilm = film)
+    eventBus.$on("selected-film", (film) => this.selectedFilm = film);
   }
 }
 </script>
@@ -49,7 +49,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   
 }
 
@@ -62,6 +61,6 @@ body {
 main {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 </style>

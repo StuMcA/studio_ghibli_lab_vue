@@ -16,6 +16,11 @@ props: ["film"],
 }
 </script>
 
-<style>
-
+<style scoped>
+    section{
+        width: 55%;
+        position: fixed;
+        right: 50px;
+        height: fit-content;
+    }
 </style>

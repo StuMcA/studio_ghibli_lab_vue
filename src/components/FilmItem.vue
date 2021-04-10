@@ -15,7 +15,8 @@ props: [
 methods: {
 
 displayInfo: function() {
-  eventBus.$emit('film-selected', this.film)
+  console.log(this.film);
+  eventBus.$emit("selected-film", this.film);
 }
 }
 }
@@ -25,6 +26,11 @@ displayInfo: function() {
 
 li {
   list-style: none;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: rgb(162, 227, 227);
 }
 </style>>
 
