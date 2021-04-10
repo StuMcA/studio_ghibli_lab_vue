@@ -14,14 +14,21 @@ import FilmList from './components/FilmList.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      films: []
+    }
+  },
   components: {
     "film-list": FilmList
   },
   methods: {
-
+  
   },
-  mounted() {
-
+  async mounted() {
+    const results = await fetch('https://ghibliapi.herokuapp.com/films');
+    const data = await results.json();
+    this.films = data;
   }
 }
 </script>
