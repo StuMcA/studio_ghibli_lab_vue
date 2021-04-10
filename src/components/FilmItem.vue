@@ -20,7 +20,6 @@ props: [
 methods: {
 
     displayInfo: function() {
-      console.log(this.film);
       eventBus.$emit("selected-film", this.film, this.shortDescription);
     },
     shortenDescription: function (film) {

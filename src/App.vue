@@ -5,7 +5,13 @@
     </header>
     <main>
       <film-list :films="films"/>
-      <film-details v-if="selectedFilm" :film="selectedFilm" :description="shortDescription"/>
+      <film-details 
+        v-if="selectedFilm" 
+        :film="selectedFilm" 
+        :description="shortDescription"
+        :viewFilmFull="viewFilmFull"
+        />
+      <film-full-details v-if="viewFilmFull" :film="selectedFilm" />
     </main>
   </div>
 </template>
@@ -14,6 +20,7 @@
 import {eventBus} from './main.js'
 import FilmList from './components/FilmList.vue'
 import FilmDetails from './components/FilmDetails.vue'
+import FilmFullDetails from './components/FilmFullDetails.vue'
 
 export default {
   name: 'App',
@@ -21,12 +28,14 @@ export default {
     return {
       films: [],
       selectedFilm: null,
-      shortDescription: ""
+      shortDescription: "",
+      viewFilmFull: false
     }
   },
   components: {
     "film-list": FilmList,
-    "film-details": FilmDetails
+    "film-details": FilmDetails,
+    "film-full-details": FilmFullDetails
   },
   methods: {
     getFilms: async function() {
@@ -39,9 +48,11 @@ export default {
     this.getFilms();
 
     eventBus.$on("selected-film", (film, description) => {
-        this.selectedFilm = film
-        this.shortDescription = description
+      this.selectedFilm = film
+      this.shortDescription = description
       });
+
+    eventBus.$on("change-show-full-details", (boolean) => this.viewFilmFull = boolean)
   }
 }
 </script>
@@ -51,16 +62,18 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   
 }
 
 #logo {
+  display: block;
   width: 300px;
+  margin: 5px auto 20px auto;
 }
 body {
   background-color: rgb(193, 248, 248);
+  margin: 0;
 }
 main {
   display: flex;

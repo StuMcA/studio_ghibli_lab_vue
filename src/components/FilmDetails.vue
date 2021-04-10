@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section @click="changeFullDetails">
       <h2>
         {{film.title}} - {{film.original_title}} ({{film.release_date}})
       </h2>
@@ -10,18 +10,29 @@
 </template>
 
 <script>
+import {eventBus} from '../main.js'
+
 export default {
 name: 'film-details',
+data() {
+    return {
+        showFilmFull: false
+    }
+},
 props: [
     "film",
-    "description"
+    "description",
+    "viewFilmFull"
 ],
 
 methods: {
-
+    changeFullDetails: function() {
+        this.showFilmFull = true;
+        eventBus.$emit("change-show-full-details", this.showFilmFull)
+    }
 },
 mounted() {
-    this.shortenDescription(this.film)
+
 }
 }
 </script>
