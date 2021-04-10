@@ -18,6 +18,8 @@ props: ['films']
 }
 </script>
 
-<style>
-
+<style scoped>
+ul {
+    width: fit-content;
+}
 </style>
