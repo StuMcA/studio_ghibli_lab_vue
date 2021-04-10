@@ -11,7 +11,7 @@
         :description="shortDescription"
         :viewFilmFull="viewFilmFull"
         />
-      <film-full-details v-if="viewFilmFull" :film="selectedFilm" />
+      <film-full-details v-if="viewFilmFull" :film="selectedFilm" :characters="filteredCharacters"/>
     </main>
   </div>
 </template>
@@ -29,7 +29,8 @@ export default {
       films: [],
       selectedFilm: null,
       shortDescription: "",
-      viewFilmFull: false
+      viewFilmFull: false,
+      characters: []
     }
   },
   components: {
@@ -42,10 +43,16 @@ export default {
       const results = await fetch('https://ghibliapi.herokuapp.com/films');
       const data = await results.json();
       this.films = data;
+    },
+    getCharacters: async function() {
+      const results = await fetch('https://ghibliapi.herokuapp.com/people');
+      const data = await results.json();
+      this.characters = data;
     }
   },
   mounted() {
     this.getFilms();
+    this.getCharacters();
 
     eventBus.$on("selected-film", (film, description) => {
       this.selectedFilm = film

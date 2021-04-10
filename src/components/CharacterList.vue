@@ -1,8 +1,6 @@
 <template>
   <ul>
-      <li v-for="(character) in characters">
-          <character-item />
-      </li>
+        <character-item v-for="(character, id) in characters" :key="id" :character="character" />
   </ul>
 </template>
 

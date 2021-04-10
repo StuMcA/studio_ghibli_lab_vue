@@ -12,7 +12,7 @@
                 <p>Produced by: <span>{{film.producer}}</span></p>
                 <p>Rotten tomato score: <span>{{film.rt_score}}%</span></p>
                 <p>{{film.description}}</p>
-                <character-list />
+                <character-list :characters="characters"/>
             </main>
 
         </section>
@@ -27,7 +27,8 @@ import CharacterList from './CharacterList.vue'
 export default {
 name: "film-full-details",
 props: [
-    "film"
+    "film",
+    "characters"
 ],
 methods: {
     changeFullDetails: function() {
