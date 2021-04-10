@@ -4,15 +4,17 @@
             <button @click="changeFullDetails">Close</button>
             <header>
                 <h1>{{film.title}} ({{film.release_date}})</h1>
+                <h3>{{film.original_title_romanised}} - {{film.original_title}}</h3>
                 <h4>{{film.running_time}} mins</h4>
-                <h3>{{film.original_title_romanised}} ({{film.original_title}})</h3>
             </header>
             <main>
-                <p>Directed by: {{film.director}}</p>
-                <p>Produced by: {{film.producer}}</p>
+                <p>Directed by: <span>{{film.director}}</span></p>
+                <p>Produced by: <span>{{film.producer}}</span></p>
+                <p>Rotten tomato score: <span>{{film.rt_score}}%</span></p>
+                <p>{{film.description}}</p>
+                <character-list />
             </main>
 
-            <p>{{film.description}}</p>
         </section>
     </div>
 
@@ -51,8 +53,21 @@ section {
     padding: 12px;
 }
 
-header * {
+section * {
     margin: 0;
+}
+
+main {
+    flex-direction: column;
+    padding: 25px;
+}
+
+main * {
+    margin-bottom: 10px;
+}
+
+span {
+    font-weight: bold;
 }
 
 button {
