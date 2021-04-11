@@ -12,7 +12,7 @@
         :viewFilmFull="viewFilmFull"
         :characters="characters"
         />
-      <film-full-details v-if="viewFilmFull" :film="selectedFilm" :characters="characters"/>
+      <film-full-details v-if="viewFilmFull" :film="selectedFilm" :characters="filteredCharacters"/>
     </main>
   </div>
 </template>
@@ -69,10 +69,16 @@ export default {
       return data;
     },
 
-    filterCharactersByFilm: function() {
+    filterCharactersByFilm: function(filmChosen) {
       this.filteredCharacters = this.characters.filter((character) => {
-        character.films.filter((film) => film.id === this.selectedFilm.id).length > 0;
-      })
+        if(character.films.find((film) => film.id === filmChosen.id)) {
+          return true
+        } else {
+          return false
+        }
+        }
+
+      )
     }
   
   },
@@ -83,7 +89,7 @@ export default {
     eventBus.$on("selected-film", (film, description) => {
       this.selectedFilm = film;
       this.shortDescription = description;
-      this.filterCharactersByFilm()
+      this.filterCharactersByFilm(film)
       });
 
     eventBus.$on("change-show-full-details", (boolean) => this.viewFilmFull = boolean)
