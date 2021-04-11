@@ -53,30 +53,26 @@ export default {
       this.getCharacterFilms()
     },
 
-    // getCharacterFilms: function() {
-    //   for (const character of this.characters) {
-    //     for (const characterFilm of character.films) {
-    //       // console.log(characterFilm);
-    //       characterFilm = this.fetchCharacterFilm(characterFilm);
-    //       console.log(character);
-    //     }
-    //   }
-    // },
     getCharacterFilms: function() {
-      this.characters.map((character) => {
-        character.films.map((characterFilm, index) => {
-          // console.log(characterFilm);
-          character.films[index] = this.fetchCharacterFilm(characterFilm);
+      this.characters.map( (character) => {
+        character.films.map(async (characterFilm, index) => {
+          const characterResults = await this.fetchCharacterFilm(characterFilm)
+          const data = characterResults;
+          character.films[index] = data;
         })        
       })
-      console.log(this.characters);
     },
 
     fetchCharacterFilm: async function(characterFilm) {
-      // console.log(character);
       const result = await fetch(characterFilm);
       const data = await result.json();
       return data;
+    },
+
+    filterCharactersByFilm: function() {
+      this.filteredCharacters = this.characters.filter((character) => {
+        character.films.filter((film) => film.id === this.selectedFilm.id).length > 0;
+      })
     }
   
   },
@@ -85,8 +81,9 @@ export default {
     this.getCharacters();
 
     eventBus.$on("selected-film", (film, description) => {
-      this.selectedFilm = film
-      this.shortDescription = description
+      this.selectedFilm = film;
+      this.shortDescription = description;
+      this.filterCharactersByFilm()
       });
 
     eventBus.$on("change-show-full-details", (boolean) => this.viewFilmFull = boolean)
