@@ -33,9 +33,6 @@ methods: {
 </script>
 
 <style scoped>
-form {
-    /* margin-left: 30px; */
-}
 
 input {
     padding-left: 30px;
