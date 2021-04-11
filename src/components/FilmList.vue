@@ -1,6 +1,7 @@
 <template>
       <ul>
-          <film-item v-for="(film) in films" :key="film.id" :film="film" />
+          <film-item v-for="(film) in filteredFilms" :key="film.id" :film="film" />
+          <!-- <film-item v-if="filteredFilms" v-for="(film) in films" :key="film.id" :film="film" /> -->
       </ul>
 </template>
 
@@ -12,7 +13,10 @@ name: 'film-list',
 components: {
     'film-item': FilmItem
 },
-props: ['films']
+props: [
+    'films',
+    'filteredFilms'
+]
 }
 </script>
 

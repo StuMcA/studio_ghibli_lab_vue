@@ -3,8 +3,9 @@
     <header>
       <img src="./assets/studio-ghibli-logo.svg" alt="" id="logo">
     </header>
+    <film-filter-form :films="films" />
     <main>
-      <film-list :films="films"/>
+      <film-list :films="films"  :filteredFilms="filteredFilms" />
       <film-details 
         v-if="selectedFilm" 
         :film="selectedFilm" 
@@ -22,6 +23,7 @@ import {eventBus} from './main.js'
 import FilmList from './components/FilmList.vue'
 import FilmDetails from './components/FilmDetails.vue'
 import FilmFullDetails from './components/FilmFullDetails.vue'
+import FilmFilterForm from './components/FilmFilterForm.vue'
 
 export default {
   name: 'App',
@@ -32,19 +34,22 @@ export default {
       shortDescription: "",
       viewFilmFull: false,
       characters: [],
-      filteredCharacters: []
+      filteredCharacters: [],
+      filteredFilms: []
     }
   },
   components: {
     "film-list": FilmList,
     "film-details": FilmDetails,
-    "film-full-details": FilmFullDetails
+    "film-full-details": FilmFullDetails,
+    "film-filter-form": FilmFilterForm
   },
   methods: {
     getFilms: async function() {
       const results = await fetch('https://ghibliapi.herokuapp.com/films');
       const data = await results.json();
       this.films = data;
+      this.filteredFilms = data;
     },
     getCharacters: async function() {
       const results = await fetch('https://ghibliapi.herokuapp.com/people');
@@ -108,7 +113,9 @@ export default {
       this.filterCharactersByFilm(film)
       });
 
-    eventBus.$on("change-show-full-details", (boolean) => this.viewFilmFull = boolean)
+    eventBus.$on("change-show-full-details", (boolean) => this.viewFilmFull = boolean);
+
+    eventBus.$on("filtered-films", (filmList) => this.filteredFilms = filmList)
   }
 }
 </script>
