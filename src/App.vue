@@ -50,7 +50,35 @@ export default {
       const results = await fetch('https://ghibliapi.herokuapp.com/people');
       const data = await results.json();
       this.characters = data;
+      this.getCharacterFilms()
+    },
+
+    // getCharacterFilms: function() {
+    //   for (const character of this.characters) {
+    //     for (const characterFilm of character.films) {
+    //       // console.log(characterFilm);
+    //       characterFilm = this.fetchCharacterFilm(characterFilm);
+    //       console.log(character);
+    //     }
+    //   }
+    // },
+    getCharacterFilms: function() {
+      this.characters.map((character) => {
+        character.films.map((characterFilm, index) => {
+          // console.log(characterFilm);
+          character.films[index] = this.fetchCharacterFilm(characterFilm);
+        })        
+      })
+      console.log(this.characters);
+    },
+
+    fetchCharacterFilm: async function(characterFilm) {
+      // console.log(character);
+      const result = await fetch(characterFilm);
+      const data = await result.json();
+      return data;
     }
+  
   },
   mounted() {
     this.getFilms();
