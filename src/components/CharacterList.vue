@@ -5,11 +5,16 @@
 </template>
 
 <script>
+import CharacterItem from './CharacterItem.vue'
+
 export default {
 name: "character-list",
 props: [
     "characters"
-]
+],
+components: {
+  'character-item': CharacterItem
+}
 }
 </script>
 

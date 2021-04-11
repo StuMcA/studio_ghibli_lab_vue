@@ -1,5 +1,5 @@
 <template>
-  <section @click="changeFullDetails">
+  <section @click="filterCharacters(); changeFullDetails()">
       <h2>
         {{film.title}} - {{film.original_title}} ({{film.release_date}})
       </h2>
@@ -22,10 +22,15 @@ data() {
 props: [
     "film",
     "description",
-    "viewFilmFull"
+    "viewFilmFull",
+    "characters"
 ],
 
 methods: {
+    filterCharacters: function() {
+
+    },
+
     changeFullDetails: function() {
         this.showFilmFull = true;
         eventBus.$emit("change-show-full-details", this.showFilmFull)

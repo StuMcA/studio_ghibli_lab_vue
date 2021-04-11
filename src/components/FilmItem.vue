@@ -33,7 +33,7 @@ methods: {
 }
 </script>
 
-<style scoped>
+<style>
 
 li {
   list-style: none;

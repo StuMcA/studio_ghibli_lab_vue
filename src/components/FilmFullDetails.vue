@@ -12,6 +12,7 @@
                 <p>Produced by: <span>{{film.producer}}</span></p>
                 <p>Rotten tomato score: <span>{{film.rt_score}}%</span></p>
                 <p>{{film.description}}</p>
+                <h4>Character list:</h4>
                 <character-list :characters="characters"/>
             </main>
 
@@ -53,9 +54,11 @@ div {
 }
 
 section {
-    margin: 10%;
+    margin: 4% 5%;
     background-color: rgb(193, 248, 248);
     padding: 12px;
+    overflow-y: scroll;
+    height: 82%;
 }
 
 section * {
@@ -88,6 +91,7 @@ button {
 
 button:hover {
     background-color: rgb(162, 227, 227);
+    color: rgb(144, 60, 60);
 }
 
 </style>

@@ -10,8 +10,9 @@
         :film="selectedFilm" 
         :description="shortDescription"
         :viewFilmFull="viewFilmFull"
+        :characters="characters"
         />
-      <film-full-details v-if="viewFilmFull" :film="selectedFilm" :characters="filteredCharacters"/>
+      <film-full-details v-if="viewFilmFull" :film="selectedFilm" :characters="characters"/>
     </main>
   </div>
 </template>
@@ -30,7 +31,8 @@ export default {
       selectedFilm: null,
       shortDescription: "",
       viewFilmFull: false,
-      characters: []
+      characters: [],
+      filteredCharacters: []
     }
   },
   components: {
