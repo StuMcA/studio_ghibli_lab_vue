@@ -1,6 +1,6 @@
 <template>
   <li>
-      {{character.name}}
+      <span>{{character.name}}</span> ({{character.species.name}})
   </li>
 </template>
 
@@ -13,6 +13,9 @@ props: [
 }
 </script>
 
-<style>
+<style scoped>
+span {
+    font-weight: bold;
+}
 
 </style>

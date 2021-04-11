@@ -51,6 +51,7 @@ export default {
       const data = await results.json();
       this.characters = data;
       this.getCharacterFilms()
+      this.getCharacterSpecies()
     },
 
     getCharacterFilms: function() {
@@ -63,10 +64,25 @@ export default {
       })
     },
 
+    getCharacterSpecies: function() {
+      this.characters.map(async (character) => {
+          const characterResults = await this.fetchCharacterSpecies(character)
+          const data = characterResults;
+          character.species = data;
+        })        
+      
+    },
+
     fetchCharacterFilm: async function(characterFilm) {
       const result = await fetch(characterFilm);
       const data = await result.json();
       return data;
+    },
+
+    fetchCharacterSpecies: async function(character) {
+      const result = await fetch(character.species);
+      const data = await result.json();
+      return data
     },
 
     filterCharactersByFilm: function(filmChosen) {
@@ -76,7 +92,7 @@ export default {
         } else {
           return false
         }
-        }
+      }
 
       )
     }
