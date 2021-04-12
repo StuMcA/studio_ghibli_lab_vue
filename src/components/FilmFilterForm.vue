@@ -23,7 +23,10 @@ methods: {
     filterFilm: function () {
         let foundFilms = this.films.filter((film) => {
             const characterNames = film.people.map((person, index) => film.people[index].name)
-            return film.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1 || characterNames.join().toLowerCase().indexOf(this.search.toLowerCase()) > -1;
+            return film.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1 || 
+                film.director.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+                film.producer.toLowerCase().indexOf(this.search.toLowerCase()) > -1 ||
+                characterNames.join().toLowerCase().indexOf(this.search.toLowerCase()) > -1;
         })
         this.filteredFilms = foundFilms
         eventBus.$emit("filtered-films", this.filteredFilms)
