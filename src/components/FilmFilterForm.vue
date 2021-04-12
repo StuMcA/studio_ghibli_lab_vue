@@ -22,7 +22,8 @@ props: [
 methods: {
     filterFilm: function () {
         let foundFilms = this.films.filter((film) => {
-            return film.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+            const characterNames = film.people.map((person, index) => film.people[index].name)
+            return film.title.toLowerCase().indexOf(this.search.toLowerCase()) > -1 || characterNames.join().toLowerCase().indexOf(this.search.toLowerCase()) > -1;
         })
         this.filteredFilms = foundFilms
         eventBus.$emit("filtered-films", this.filteredFilms)

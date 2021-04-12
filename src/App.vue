@@ -34,7 +34,6 @@ export default {
       shortDescription: "",
       viewFilmFull: false,
       characters: [],
-      // filteredCharacters: [],
       filteredFilms: []
     }
   },
