@@ -13,7 +13,7 @@
                 <p>Rotten tomato score: <span>{{film.rt_score}}%</span></p>
                 <p>{{film.description}}</p>
                 <h4>Character list:</h4>
-                <character-list :characters="characters"/>
+                <character-list :characters="film.people"/>
             </main>
 
         </section>

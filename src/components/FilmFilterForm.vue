@@ -40,12 +40,12 @@ input {
     height: 40px;
     border: none;
     background: rgb(72, 107, 107);
-    color: white;
+    color: rgb(193, 248, 248);
     font-weight: bolder;
 }
 
 ::placeholder {
-    color: white;
+    color: rgb(193, 248, 248);
     font-weight: bolder;
 }
 

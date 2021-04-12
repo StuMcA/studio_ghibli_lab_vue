@@ -13,7 +13,7 @@
         :viewFilmFull="viewFilmFull"
         :characters="characters"
         />
-      <film-full-details v-if="viewFilmFull" :film="selectedFilm" :characters="filteredCharacters"/>
+      <film-full-details v-if="viewFilmFull" :film="selectedFilm" />
     </main>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
       shortDescription: "",
       viewFilmFull: false,
       characters: [],
-      filteredCharacters: [],
+      // filteredCharacters: [],
       filteredFilms: []
     }
   },
@@ -55,8 +55,8 @@ export default {
       const results = await fetch('https://ghibliapi.herokuapp.com/people');
       const data = await results.json();
       this.characters = data;
-      this.getCharacterFilms()
-      this.getCharacterSpecies()
+      this.getCharacterFilms();
+      this.getCharacterSpecies();
     },
 
     getCharacterFilms: function() {
@@ -91,7 +91,7 @@ export default {
     },
 
     filterCharactersByFilm: function(filmChosen) {
-      this.filteredCharacters = this.characters.filter((character) => {
+      return this.characters.filter((character) => {
         if(character.films.find((film) => film.id === filmChosen.id)) {
           return true
         } else {
@@ -100,6 +100,13 @@ export default {
       }
 
       )
+    },
+
+    addCharactersToFilm: function() {
+      this.films.map((film) => {
+        const characters = this.filterCharactersByFilm(film)
+        film.people = characters;
+      })
     }
   
   },
@@ -110,7 +117,8 @@ export default {
     eventBus.$on("selected-film", (film, description) => {
       this.selectedFilm = film;
       this.shortDescription = description;
-      this.filterCharactersByFilm(film)
+      // this.filterCharactersByFilm(film);
+      this.addCharactersToFilm();
       });
 
     eventBus.$on("change-show-full-details", (boolean) => this.viewFilmFull = boolean);
