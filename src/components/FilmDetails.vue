@@ -44,6 +44,7 @@ mounted() {
 
 <style scoped>
     section{
+        margin-top: 15px;
         width: 55%;
         position: fixed;
         right: 50px;
